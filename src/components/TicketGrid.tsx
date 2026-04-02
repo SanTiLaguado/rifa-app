@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { fetchTickets, type TicketStatus } from '../services/api'
 import { CONFIG } from '../config'
@@ -97,7 +96,7 @@ function TicketCard({ number, status, isSelected, isDisabled, onClick }: TicketC
         disabled={!isAvailable || isDisabled}
         onFocus={() => setHovered(true)}
         onBlur={() => setHovered(false)}
-        className={`relative flex flex-col items-center justify-center rounded-lg transition-all duration-150 w-full ${scale} ${
+        className={`relative flex flex-col items-center justify-center rounded-lg transition-all duration-150 w-full ${cursor} ${scale} ${
           isSelected ? 'shadow-[0_0_16px_rgba(255,215,0,0.35)]' : ''
         }`}
         style={{
@@ -246,7 +245,6 @@ function TicketsLoader() {
 
 export default function TicketGrid() {
   const { selected, toggle, isMaxReached } = useCart()
-  const navigate = useNavigate()
   const [statuses, setStatuses] = useState<Record<string, TicketStatus>>(buildInitialStatuses)
   const [loading, setLoading] = useState(true)
 
